@@ -7,7 +7,7 @@ An effortless approach to executing webassembly within a web worker thread and c
 
 
 ```
-npm install wasmworker
+npm install @frontend.js/wasm-worker
 ```
  
 ```js
