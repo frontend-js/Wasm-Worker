@@ -4,7 +4,7 @@ onmessage = function ({ data }) {
   const { id, event, value } = data
 
   if (event === 'WasmWorkerInit') {
-    WebAssembly.instantiateStreaming(fetch(value))
+    WebAssembly.instantiateStreaming(fetch(new URL(value, location.origin)))
       .then(module => {
         wasmModule = module.instance.exports
         send(id, 'WasmWorkerCreated', Object.keys(wasmModule))
@@ -20,5 +20,5 @@ onmessage = function ({ data }) {
 }
 
 function send(id, event, value) {
-  this.postMessage({ id, event, value })
+  globalThis.postMessage({ id, event, value })
 }

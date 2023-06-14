@@ -1,9 +1,11 @@
+import WebWorker from './wasm-worker?worker&inline'
+
 export class WasmWorker {
   #worker = {}
   #events = {}
 
   constructor(url) {
-    this.#worker = new Worker(new URL('./wasm-worker.js', import.meta.url))
+    this.#worker = new WebWorker()
     this.#worker.addEventListener('message', ({data}) => {
       const { id, event, value } = data
 
